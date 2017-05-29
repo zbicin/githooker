@@ -1,0 +1,10 @@
+{
+    "secret": "lorem",
+    "url": "/update",
+    "steps": [
+        "git reset --hard",
+        "git pull -f",
+	    "npm install --production",
+    	"npm start"
+    ]
+}
