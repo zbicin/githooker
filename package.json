@@ -1,0 +1,20 @@
+{
+  "name": "githooker",
+  "version": "1.0.0",
+  "description": "Simple webhook endpoint for custom GitHub continuous deployment powered by Node.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zbicin/githooker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zbicin/githooker/issues"
+  },
+  "homepage": "https://github.com/zbicin/githooker#readme"
+}
