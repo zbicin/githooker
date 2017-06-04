@@ -10,6 +10,8 @@ var url = config.url || '/update';
 var isPending = false;
 var server = http.createServer();
 
+process.title = 'githooker';
+
 server.on('request', onRequest);
 
 server.listen(port, hostname, function onListen() {
