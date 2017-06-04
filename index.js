@@ -68,11 +68,11 @@ function onRequest(request, response) {
                     if (!validateSecret(request, githubMessage)) throw 'Incorrect secret';
                     if (isPending) throw 'Update already pending';
 
+                    response.end('👌');
+
                     isPending = true;
                     doUpdate(githubMessage);
                     isPending = false;
-
-                    response.end('👌');
                 }
                 catch (errorMessage) {
                     handleError(errorMessage, response);
