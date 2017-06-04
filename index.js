@@ -52,6 +52,7 @@ function onRequest(request, response) {
     log('Incoming request ' + request.method + ' ' + request.url + '.');
 
     try {
+        if (request.url === '/favicon.ico') response.end();
         if (request.url !== config.url) throw 'Incorrect url';
         if (request.method !== 'POST') throw 'Incorrect method';
 
