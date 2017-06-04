@@ -1,6 +1,6 @@
 var crypto = require('crypto');
 var http = require('http');
-var exec = require('child_process').exec;
+var execSync = require('child_process').execSync;
 var config = require('./config.json');
 
 var hostname = config.hostname || '0.0.0.0';
@@ -24,7 +24,7 @@ function doUpdate(githubMessage) {
     for (var i = 0; i < config.steps.length; i++) {
         var step = config.steps[i];
         log('Executing step #' + i + ' - ' + step);
-        exec(step, execCallback);
+        execSync(step, execCallback);
     }
 
     log('Update done.');
