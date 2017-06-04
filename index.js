@@ -10,10 +10,11 @@ var url = config.url || '/update';
 var isPending = false;
 var server = http.createServer();
 
-server.on('listen', onListen);
 server.on('request', onRequest);
 
-server.listen(port, hostname);
+server.listen(port, hostname, function onListen() {
+    log('Githooker is listening on port ' + port + '...');
+});
 
 function doUpdate(githubMessage) {
     log(githubMessage.pusher.name + ' triggered update. Head will be at "' + githubMessage.head_commit.message + '" now.');
@@ -45,10 +46,6 @@ function handleError(errorMessage, response) {
 
 function log(what) {
     console.log(new Date().toJSON() + ' ' + what);
-}
-
-function onListen() {
-    log('Githooker is listening on port ' + port + '...');
 }
 
 function onRequest(request, response) {
