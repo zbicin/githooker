@@ -1,3 +1,4 @@
+var crypto = require('crypto');
 var http = require('http');
 var exec = require('child_process').exec;
 var config = require('./config.json');
@@ -64,7 +65,7 @@ function onRequest(request, response) {
                 try {
                     var githubMessage = JSON.parse(Buffer.concat(body).toString());
 
-                    if (githubMessage.secret !== config.secret) throw 'Incorrect secret';
+                    if (!validateSecret(request, githubMessage)) throw 'Incorrect secret';
                     if (isPending) throw 'Update already pending';
 
                     isPending = true;
@@ -81,4 +82,15 @@ function onRequest(request, response) {
     catch (errorMessage) {
         handleError(errorMessage, response);
     }
+}
+
+function validateSecret(request, githubMessage) {
+    var blob = JSON.stringify(githubMessage);
+    var hmac = crypto.createHmac('sha1', config.secret);
+    var ourSignature = 'sha1=' + hmac.update(blob).digest('hex');
+    var theirSignature = request.headers['x-hub-signature'];
+    var bufferA = Buffer.from(ourSignature, 'utf8');
+    var bufferB = Buffer.from(theirSignature, 'utf8');
+
+    return crypto.timingSafeEqual(bufferA, bufferB);
 }
