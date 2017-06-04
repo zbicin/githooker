@@ -36,7 +36,7 @@ function execCallback(error, stdout, stderr) {
 
 function handleError(errorMessage, response) {
     if (response) {
-        response.status = 400;
+        response.statusCode = 400;
         response.end();
         log('400 - ' + errorMessage + '.');
     } else {
